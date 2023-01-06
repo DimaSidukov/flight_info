@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:flight_info/colors/AppColors.dart';
+import 'package:flight_info/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../data/Flight.dart';
+import '../data/flight.dart';
 import '../data/api_client.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -108,7 +108,7 @@ class _HomeScreen extends State<HomeScreen> {
                                 child: ListView.separated(
                                   shrinkWrap: true,
                                   physics: const BouncingScrollPhysics(),
-                                  itemCount: data?.length ?? 0,
+                                  itemCount: data.length,
                                   scrollDirection: Axis.horizontal,
                                   separatorBuilder: (context, index) =>
                                       const SizedBox(width: 10),
@@ -116,7 +116,7 @@ class _HomeScreen extends State<HomeScreen> {
                                     return GestureDetector(
                                       onTap: () {
                                         context.push('/flight',
-                                            extra: data![index].toJson());
+                                            extra: data[index].toJson());
                                       },
                                       child: Container(
                                         width: 120,
@@ -138,7 +138,7 @@ class _HomeScreen extends State<HomeScreen> {
                                                       const Size.fromRadius(60),
                                                   // Image radius
                                                   child: Image.network(
-                                                      data![index].imgUrl,
+                                                      data[index].imgUrl,
                                                       fit: BoxFit.cover),
                                                 ),
                                               ),
@@ -150,7 +150,7 @@ class _HomeScreen extends State<HomeScreen> {
                                                           const EdgeInsets.only(
                                                               left: 12, top: 5),
                                                       child: Text(
-                                                        data![index]
+                                                        data[index]
                                                             .destinationCity,
                                                         maxLines: 1,
                                                         overflow: TextOverflow
@@ -258,7 +258,7 @@ class _HomeScreen extends State<HomeScreen> {
                                   child: ListView.separated(
                                     shrinkWrap: true,
                                     physics: const BouncingScrollPhysics(),
-                                    itemCount: data?.length ?? 0,
+                                    itemCount: data.length,
                                     scrollDirection: Axis.horizontal,
                                     separatorBuilder: (context, index) =>
                                         const SizedBox(width: 10),
@@ -266,7 +266,7 @@ class _HomeScreen extends State<HomeScreen> {
                                       return GestureDetector(
                                           onTap: () {
                                             context.push('/flight',
-                                                extra: data![index].toJson());
+                                                extra: data[index].toJson());
                                           },
                                           child: Container(
                                             width: 120,
@@ -290,7 +290,7 @@ class _HomeScreen extends State<HomeScreen> {
                                                               60),
                                                       // Image radius
                                                       child: Image.network(
-                                                          data![index].imgUrl,
+                                                          data[index].imgUrl,
                                                           fit: BoxFit.cover),
                                                     ),
                                                   ),
@@ -369,7 +369,8 @@ class _HomeScreen extends State<HomeScreen> {
                           }
                         })),
                 Padding(
-                    padding: EdgeInsets.only(top: 20, left: 34, right: 34),
+                    padding:
+                        const EdgeInsets.only(top: 20, left: 34, right: 34),
                     child: Container(
                       decoration: const BoxDecoration(
                           gradient: LinearGradient(

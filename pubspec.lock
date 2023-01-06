@@ -99,6 +99,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "8.4.2"
+  carapacik_lints:
+    dependency: "direct dev"
+    description:
+      name: carapacik_lints
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.2"
   characters:
     dependency: transitive
     description:

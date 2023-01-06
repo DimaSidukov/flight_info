@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class AppColors {
@@ -12,5 +10,4 @@ class AppColors {
   static const Color grey2 = Color(0xFF979797);
   static const Color grey3 = Color(0xFFE9E9E9);
   static const Color grey4 = Color(0xFFF6F6F6);
-
 }

@@ -1,10 +1,10 @@
-import 'package:flight_info/colors/AppColors.dart';
+import 'package:flight_info/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-import '../data/Flight.dart';
+import '../data/flight.dart';
 
 class FlightScreen extends StatefulWidget {
   const FlightScreen({super.key, required this.flight});
@@ -282,7 +282,8 @@ class _FlightScreen extends State<FlightScreen> {
               Align(
                 alignment: Alignment.center,
                 child: Padding(
-                    padding: EdgeInsets.only(top: 200, left: 34, right: 34),
+                    padding:
+                        const EdgeInsets.only(top: 200, left: 34, right: 34),
                     child: Container(
                       decoration: const BoxDecoration(
                           gradient: LinearGradient(

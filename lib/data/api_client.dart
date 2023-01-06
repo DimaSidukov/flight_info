@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
-import 'Flight.dart';
+import 'flight.dart';
 
 part 'api_client.g.dart';
 

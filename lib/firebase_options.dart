@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '925599834428',
     projectId: 'flight-info-project',
     storageBucket: 'flight-info-project.appspot.com',
-    iosClientId: '925599834428-pmbt8vecn37hng6fn4uc3j6dnh3mu2dv.apps.googleusercontent.com',
+    iosClientId:
+        '925599834428-pmbt8vecn37hng6fn4uc3j6dnh3mu2dv.apps.googleusercontent.com',
     iosBundleId: 'com.example.flightInfo',
   );
 }
