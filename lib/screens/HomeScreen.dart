@@ -98,107 +98,115 @@ class _HomeScreen extends State<HomeScreen> {
                               child: Text("No internet connection!"));
                         }
                         if (snapshot.connectionState == ConnectionState.done) {
-                          List<Flight> data = snapshot.data as List<Flight>;
-                          return SizedBox(
-                              height: 174,
-                              child: ListView.separated(
-                                shrinkWrap: true,
-                                physics: const BouncingScrollPhysics(),
-                                itemCount: data.length,
-                                scrollDirection: Axis.horizontal,
-                                separatorBuilder: (context, index) =>
-                                    const SizedBox(width: 10),
-                                itemBuilder: (context, index) {
-                                  return GestureDetector(
-                                    onTap: () {
-                                      context.push('/flight',
-                                          extra: data[index].toJson());
-                                    },
-                                    child: Container(
-                                      width: 120,
-                                      height: 174,
-                                      decoration: BoxDecoration(
-                                          color: AppColors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(15)),
-                                      child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              // Image border
-                                              child: SizedBox.fromSize(
-                                                size: const Size.fromRadius(60),
-                                                // Image radius
-                                                child: Image.network(
-                                                    data[index].imgUrl,
-                                                    fit: BoxFit.cover),
+                          List<Flight>? data = snapshot.data;
+                          if (data == null) {
+                            return const Text(
+                                "Information was not loaded! Try again later!");
+                          } else {
+                            return SizedBox(
+                                height: 174,
+                                child: ListView.separated(
+                                  shrinkWrap: true,
+                                  physics: const BouncingScrollPhysics(),
+                                  itemCount: data?.length ?? 0,
+                                  scrollDirection: Axis.horizontal,
+                                  separatorBuilder: (context, index) =>
+                                      const SizedBox(width: 10),
+                                  itemBuilder: (context, index) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        context.push('/flight',
+                                            extra: data![index].toJson());
+                                      },
+                                      child: Container(
+                                        width: 120,
+                                        height: 174,
+                                        decoration: BoxDecoration(
+                                            color: AppColors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(15)),
+                                        child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                                // Image border
+                                                child: SizedBox.fromSize(
+                                                  size:
+                                                      const Size.fromRadius(60),
+                                                  // Image radius
+                                                  child: Image.network(
+                                                      data![index].imgUrl,
+                                                      fit: BoxFit.cover),
+                                                ),
                                               ),
-                                            ),
-                                            Expanded(
-                                                child: Stack(
-                                              children: [
-                                                Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 12, top: 5),
-                                                    child: Text(
-                                                      data[index]
-                                                          .destinationCity,
-                                                      maxLines: 1,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: const TextStyle(
-                                                          color:
-                                                              AppColors.black,
-                                                          fontFamily:
-                                                              'FiraSans',
-                                                          fontSize: 20),
-                                                    )),
-                                                const Align(
-                                                    alignment:
-                                                        Alignment.bottomLeft,
-                                                    child: Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 12, bottom: 10),
+                                              Expanded(
+                                                  child: Stack(
+                                                children: [
+                                                  Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 12, top: 5),
                                                       child: Text(
-                                                        "Starting from",
-                                                        style: TextStyle(
-                                                            color: AppColors
-                                                                .purple,
+                                                        data![index]
+                                                            .destinationCity,
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: const TextStyle(
+                                                            color:
+                                                                AppColors.black,
                                                             fontFamily:
                                                                 'FiraSans',
-                                                            fontSize: 10),
+                                                            fontSize: 20),
+                                                      )),
+                                                  const Align(
+                                                      alignment:
+                                                          Alignment.bottomLeft,
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 12,
+                                                                bottom: 10),
+                                                        child: Text(
+                                                          "Starting from",
+                                                          style: TextStyle(
+                                                              color: AppColors
+                                                                  .purple,
+                                                              fontFamily:
+                                                                  'FiraSans',
+                                                              fontSize: 10),
+                                                        ),
+                                                      )),
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.bottomRight,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 11,
+                                                              bottom: 10),
+                                                      child: Text(
+                                                        "${data[index].minPrice}\$",
+                                                        style: const TextStyle(
+                                                            color:
+                                                                AppColors.black,
+                                                            fontFamily:
+                                                                'FiraSans',
+                                                            fontSize: 14),
                                                       ),
-                                                    )),
-                                                Align(
-                                                  alignment:
-                                                      Alignment.bottomRight,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 11,
-                                                            bottom: 10),
-                                                    child: Text(
-                                                      "${data[index].minPrice}\$",
-                                                      style: const TextStyle(
-                                                          color:
-                                                              AppColors.black,
-                                                          fontFamily:
-                                                              'FiraSans',
-                                                          fontSize: 14),
                                                     ),
-                                                  ),
-                                                )
-                                              ],
-                                            ))
-                                          ]),
-                                    ),
-                                  );
-                                },
-                              ));
+                                                  )
+                                                ],
+                                              ))
+                                            ]),
+                                      ),
+                                    );
+                                  },
+                                ));
+                          }
                         } else {
                           return const Center(
                             child: CircularProgressIndicator(),
@@ -240,112 +248,120 @@ class _HomeScreen extends State<HomeScreen> {
                           }
                           if (snapshot.connectionState ==
                               ConnectionState.done) {
-                            List<Flight> data = snapshot.data as List<Flight>;
-                            return SizedBox(
-                                height: 174,
-                                child: ListView.separated(
-                                  shrinkWrap: true,
-                                  physics: const BouncingScrollPhysics(),
-                                  itemCount: data.length,
-                                  scrollDirection: Axis.horizontal,
-                                  separatorBuilder: (context, index) =>
-                                      const SizedBox(width: 10),
-                                  itemBuilder: (context, index) {
-                                    return GestureDetector(
-                                        onTap: () {
-                                          context.push('/flight',
-                                              extra: data[index].toJson());
-                                        },
-                                        child: Container(
-                                          width: 120,
-                                          height: 174,
-                                          decoration: BoxDecoration(
-                                              color: AppColors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(15)),
-                                          child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(15),
-                                                  // Image border
-                                                  child: SizedBox.fromSize(
-                                                    size: const Size.fromRadius(
-                                                        60),
-                                                    // Image radius
-                                                    child: Image.network(
-                                                        data[index].imgUrl,
-                                                        fit: BoxFit.cover),
+                            List<Flight>? data = snapshot.data;
+                            if (data == null) {
+                              return const Text(
+                                  "Information was not loaded! Try again later!");
+                            } else {
+                              return SizedBox(
+                                  height: 174,
+                                  child: ListView.separated(
+                                    shrinkWrap: true,
+                                    physics: const BouncingScrollPhysics(),
+                                    itemCount: data?.length ?? 0,
+                                    scrollDirection: Axis.horizontal,
+                                    separatorBuilder: (context, index) =>
+                                        const SizedBox(width: 10),
+                                    itemBuilder: (context, index) {
+                                      return GestureDetector(
+                                          onTap: () {
+                                            context.push('/flight',
+                                                extra: data![index].toJson());
+                                          },
+                                          child: Container(
+                                            width: 120,
+                                            height: 174,
+                                            decoration: BoxDecoration(
+                                                color: AppColors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(15)),
+                                            child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15),
+                                                    // Image border
+                                                    child: SizedBox.fromSize(
+                                                      size:
+                                                          const Size.fromRadius(
+                                                              60),
+                                                      // Image radius
+                                                      child: Image.network(
+                                                          data![index].imgUrl,
+                                                          fit: BoxFit.cover),
+                                                    ),
                                                   ),
-                                                ),
-                                                Expanded(
-                                                    child: Stack(
-                                                  children: [
-                                                    Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 12,
-                                                                top: 5),
-                                                        child: Text(
-                                                          data[index]
-                                                              .destinationCity,
-                                                          maxLines: 1,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          style: const TextStyle(
-                                                              color: AppColors
-                                                                  .black,
-                                                              fontFamily:
-                                                                  'FiraSans',
-                                                              fontSize: 20),
-                                                        )),
-                                                    const Align(
-                                                        alignment: Alignment
-                                                            .bottomLeft,
-                                                        child: Padding(
+                                                  Expanded(
+                                                      child: Stack(
+                                                    children: [
+                                                      Padding(
                                                           padding:
-                                                              EdgeInsets.only(
+                                                              const EdgeInsets
+                                                                      .only(
                                                                   left: 12,
-                                                                  bottom: 10),
+                                                                  top: 5),
                                                           child: Text(
-                                                            "Starting from",
-                                                            style: TextStyle(
+                                                            data[index]
+                                                                .destinationCity,
+                                                            maxLines: 1,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            style: const TextStyle(
                                                                 color: AppColors
-                                                                    .purple,
+                                                                    .black,
                                                                 fontFamily:
                                                                     'FiraSans',
-                                                                fontSize: 10),
+                                                                fontSize: 20),
+                                                          )),
+                                                      const Align(
+                                                          alignment: Alignment
+                                                              .bottomLeft,
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    left: 12,
+                                                                    bottom: 10),
+                                                            child: Text(
+                                                              "Starting from",
+                                                              style: TextStyle(
+                                                                  color: AppColors
+                                                                      .purple,
+                                                                  fontFamily:
+                                                                      'FiraSans',
+                                                                  fontSize: 10),
+                                                            ),
+                                                          )),
+                                                      Align(
+                                                        alignment: Alignment
+                                                            .bottomRight,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  right: 11,
+                                                                  bottom: 10),
+                                                          child: Text(
+                                                            "${data[index].minPrice}\$",
+                                                            style: const TextStyle(
+                                                                color: AppColors
+                                                                    .black,
+                                                                fontFamily:
+                                                                    'FiraSans',
+                                                                fontSize: 14),
                                                           ),
-                                                        )),
-                                                    Align(
-                                                      alignment:
-                                                          Alignment.bottomRight,
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                right: 11,
-                                                                bottom: 10),
-                                                        child: Text(
-                                                          "${data[index].minPrice}\$",
-                                                          style: const TextStyle(
-                                                              color: AppColors
-                                                                  .black,
-                                                              fontFamily:
-                                                                  'FiraSans',
-                                                              fontSize: 14),
                                                         ),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ))
-                                              ]),
-                                        ));
-                                  },
-                                ));
+                                                      )
+                                                    ],
+                                                  ))
+                                                ]),
+                                          ));
+                                    },
+                                  ));
+                            }
                           } else {
                             return const Center(
                               child: CircularProgressIndicator(),

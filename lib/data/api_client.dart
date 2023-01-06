@@ -10,8 +10,8 @@ abstract class ApiClient {
   factory ApiClient(Dio dio, {String baseUrl}) = _ApiClient;
 
   @GET("/international")
-  Future<List<Flight>> getInternationalFlights();
+  Future<List<Flight>?> getInternationalFlights();
 
   @GET("/local")
-  Future<List<Flight>> getLocalFlights();
+  Future<List<Flight>?> getLocalFlights();
 }
